@@ -45,8 +45,8 @@ const SignIn = () => {
         localStorage.setItem('token', token); // Save token in localStorage
 
         // Optionally store email and password for future login prefilling
-        localStorage.setItem('email', email);
-        localStorage.setItem('password', password);
+        // localStorage.setItem('email', email);
+        // localStorage.setItem('password', password);
 
         // Dispatch user data to Redux store
         
