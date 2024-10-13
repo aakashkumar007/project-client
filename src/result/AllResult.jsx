@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import Loader from '../component/Loader';
 
 const AllResult = () => {
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const resultsPerPage = 15; // Adjust the number of results per page
+  const resultsPerPage = 10; // Adjust the number of results per page
 
   const apiUrl = import.meta.env.VITE_REACT_API_URL;
+
+  
 
   useEffect(() => {
     const fetchResultsData = async () => {
@@ -29,8 +32,8 @@ const AllResult = () => {
         }
 
         const data = await response.json();
-        const sortedResults = data.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
-        setResults(sortedResults);
+       
+        setResults(data.results); // Set the fetched results without unnecessary sorting
       } catch (error) {
         setError(error.message);
       } finally {
@@ -38,10 +41,10 @@ const AllResult = () => {
       }
     };
     fetchResultsData();
-  }, []);
+  }, [apiUrl]);
 
   if (loading) {
-    return <div>Loading data...</div>;
+    return <div><Loader /></div>;
   }
 
   if (error) {
@@ -100,7 +103,7 @@ const AllResult = () => {
                         day: 'numeric',
                       })}
                     </p>
-                    <p className="text-gray-500 text-xs">— by {result.author || 'Unknown'}</p>
+                    <p className="text-gray-500 text-xs">— by Prakash</p>
                     <p className="text-gray-500 text-xs">in Latest Results</p>
                   </div>
                 </div>

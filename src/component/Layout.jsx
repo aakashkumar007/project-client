@@ -5,8 +5,8 @@ import Footer from '../pages/footer/Footer';
 const Layout = ({ children }) => {
   return (
     <div className="bg-gray-50 min-h-screen">
-      <Header />
-      <main className="container mx-auto py-8">
+     <Header />
+      <main className="container mx-auto py-20 min-h-screen mt">
         {children}
       </main>
       <Footer />

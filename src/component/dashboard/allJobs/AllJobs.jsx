@@ -1,28 +1,31 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useTransition } from 'react';
 import { Link } from 'react-router-dom';
+import Loader from '../../Loader';
 
 const AllJobsPage = () => {
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const jobsPerPage = 15; // Adjust the number of jobs per page
-
-  // Access the environment variable
+  const [totalPages, setTotalPages] = useState(1);
+  const [isPending, startTransition] = useTransition(); // useTransition hook for non-blocking updates
+  const jobsPerPage = 10;
   const apiUrl = import.meta.env.VITE_REACT_API_URL;
 
   useEffect(() => {
     const fetchJobData = async () => {
       try {
         setLoading(true);
-        const token = localStorage.getItem('token'); // Get token from local storage
-        const response = await fetch(`${apiUrl}/api/jobs/get-jobs`, {
+        const token = localStorage.getItem('token');
+        
+        // Fetch data for the current page
+        const response = await fetch(`${apiUrl}/api/jobs/get-jobs?page=${currentPage}&limit=${jobsPerPage}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`, // Include the token in the Authorization header
+            'Authorization': `Bearer ${token}`,
           },
-          credentials: 'include', // Send cookies with the request
+          credentials: 'include',
         });
 
         if (!response.ok) {
@@ -30,43 +33,32 @@ const AllJobsPage = () => {
         }
 
         const data = await response.json();
-        const sortedJobs = data.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
-        setJobs(sortedJobs);
+        const flattenedJobs = data.jobs;
+
+        startTransition(() => {
+          setJobs(flattenedJobs);
+          setTotalPages(data.totalPages);
+        });
       } catch (error) {
         setError(error.message);
       } finally {
         setLoading(false);
       }
     };
+
     fetchJobData();
-  }, [apiUrl]);  // Make sure to add apiUrl as a dependency
+  }, [apiUrl, currentPage]);
+
+  // Filter out invalid jobs (e.g., jobs without a valid id, title, or created_at)
+  const validJobs = jobs;
 
   if (loading) {
-    return <div>Loading data...</div>;
+    return <div className="text-center"><Loader/></div>;
   }
 
   if (error) {
-    return <div>Error fetching data: {error}</div>;
+    return <div className="text-center text-red-500">Error fetching data: {error}</div>;
   }
-
-  // Pagination logic
-  const indexOfLastJob = currentPage * jobsPerPage;
-  const indexOfFirstJob = indexOfLastJob - jobsPerPage;
-  const currentJobs = jobs.slice(indexOfFirstJob, indexOfLastJob);
-
-  const totalPages = Math.ceil(jobs.length / jobsPerPage);
-
-  const handleNextPage = () => {
-    if (currentPage < totalPages) {
-      setCurrentPage(currentPage + 1);
-    }
-  };
-
-  const handlePreviousPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
-    }
-  };
 
   return (
     <div className="bg-gray-50 min-h-screen">
@@ -76,24 +68,18 @@ const AllJobsPage = () => {
         </h1>
 
         <section className="bg-white shadow-md rounded-lg p-4">
-          {currentJobs.length > 0 ? (
-            currentJobs.map((job) => (
-              <div
-                key={job.id}
-                className="border-b border-gray-300 py-1"
-                style={{ marginBottom: '2px', padding: '0 4px' }}
-              >
-                <div className="flex justify-center items-center">
-                  <div className="w-full text-center">
-                    <Link
-                      to={`/job/${job.id}`}
-                      className="text-lg font-serif text-gray-800 hover:underline"
-                      style={{ lineHeight: '1.1' }}
-                    >
-                      {job.title}
-                    </Link>
-                  </div>
-                  <div className="text-right w-full mt-1">
+          {validJobs.length > 0 ? (
+            validJobs.map((job) => (
+              <div key={job.id} className="border-b border-gray-300 py-1 mb-2">
+                <div className="flex justify-between items-center">
+                  <Link
+                    to={`/job/${job.id}`}
+                    className="text-lg font-serif text-gray-800 hover:underline flex-grow text-center"
+                    style={{ lineHeight: '1.1' }}
+                  >
+                    {job.title}
+                  </Link>
+                  <div className="text-right">
                     <p className="text-gray-500 text-xs">
                       {new Date(job.created_at).toLocaleDateString('en-US', {
                         year: 'numeric',
@@ -101,20 +87,21 @@ const AllJobsPage = () => {
                         day: 'numeric',
                       })}
                     </p>
-                    <p className="text-gray-500 text-xs">— by Prakash Kumar</p>
+                    <p className="text-gray-500 text-xs">— by Prakash</p>
                     <p className="text-gray-500 text-xs">in Latest Jobs</p>
                   </div>
                 </div>
               </div>
             ))
           ) : (
-            <p>No jobs available at the moment.</p>
+            <p className="text-center min-h-screen">No valid jobs available at the moment.</p>
           )}
 
+          {/* Pagination controls */}
           <div className="flex justify-between mt-4">
             <button
               className={`px-3 py-1 text-white rounded-md ${currentPage === 1 ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-500'}`}
-              onClick={handlePreviousPage}
+              onClick={() => startTransition(() => setCurrentPage(currentPage - 1))}
               disabled={currentPage === 1}
             >
               Previous
@@ -122,7 +109,7 @@ const AllJobsPage = () => {
             <p className="text-sm text-gray-700">Page {currentPage} of {totalPages}</p>
             <button
               className={`px-3 py-1 text-white rounded-md ${currentPage === totalPages ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-500'}`}
-              onClick={handleNextPage}
+              onClick={() => startTransition(() => setCurrentPage(currentPage + 1))}
               disabled={currentPage === totalPages}
             >
               Next

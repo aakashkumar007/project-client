@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import Loader from '../component/Loader';
 
 const AllAdmitCards = () => {
   const [admitCards, setAdmitCards] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const admitCardsPerPage = 15; // Adjust the number of admit cards per page
+  const admitCardsPerPage = 10; // Adjust the number of admit cards per page
 
   const apiUrl = import.meta.env.VITE_REACT_API_URL;
 
@@ -29,8 +30,7 @@ const AllAdmitCards = () => {
         }
 
         const data = await response.json();
-        const sortedAdmitCards = data.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
-        setAdmitCards(sortedAdmitCards);
+        setAdmitCards(data); // Set the fetched admit cards directly without sorting
       } catch (error) {
         setError(error.message);
       } finally {
@@ -39,10 +39,10 @@ const AllAdmitCards = () => {
     };
 
     fetchAdmitCards();
-  }, []);
+  }, [apiUrl]);
 
   if (loading) {
-    return <div className="text-center py-4">Loading data...</div>;
+    return <div className="text-center py-4"><Loader /></div>;
   }
 
   if (error) {
@@ -76,7 +76,6 @@ const AllAdmitCards = () => {
         </h1>
 
         <section className="bg-white shadow-md rounded-lg p-4">
-
           {currentAdmitCards.length > 0 ? (
             currentAdmitCards.map((admitCard) => (
               <div
@@ -101,7 +100,7 @@ const AllAdmitCards = () => {
                         day: 'numeric',
                       })}
                     </p>
-                    <p className="text-gray-500 text-xs">— by {admitCard.author || 'Unknown'}</p>
+                    <p className="text-gray-500 text-xs">— by Prakash</p>
                     <p className="text-gray-500 text-xs">in Latest Admit Cards</p>
                   </div>
                 </div>

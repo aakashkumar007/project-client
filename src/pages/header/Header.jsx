@@ -5,6 +5,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { useSelector, useDispatch } from "react-redux"; // Import hooks for Redux
 import { clearUser, setUser } from "../../redux/authSlice"; // Import actions
+import { GiWitchFlight } from "react-icons/gi";
 
 const Header = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -50,7 +51,7 @@ const Header = () => {
   };
 
   return (
-    <header className="font-semibold py-4 shadow-md text-slate-800 bg-slate-200">
+    <header className="font-semibold py-4 shadow-md text-slate-800 bg-slate-200 fixed  w-full">
       <nav className="container mx-auto flex flex-wrap justify-between items-center">
         <Link to="/">
           <span className="flex gap-4 pl-6">
@@ -59,6 +60,7 @@ const Header = () => {
               alt="logo"
               className="h-13 w-12 hover:bg-slate-600 rounded-full"
             />
+            
             <h1 className="text-xl font-bold mt-3">Sarkari Naukari</h1>
           </span>
         </Link>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
+import Loader from '../../Loader';
 
 const JobDetails = () => {
   const { id } = useParams(); // Get the job ID from the URL
@@ -33,14 +34,17 @@ const JobDetails = () => {
           },
           credentials: 'include', // Ensure cookies are included if your server requires this
         });
+        console.log(response)
 
         if (!response.ok) {
           throw new Error('Failed to fetch job details');
         }
 
         const data = await response.json();
+        console.log('Job details:', data); // Log the job data
         setJob(data);
       } catch (err) {
+        console.error(err); // Log error for debugging
         setError(err.message);
       } finally {
         setLoading(false);
@@ -72,12 +76,13 @@ const JobDetails = () => {
       toast.success('Job Deleted successfully');
       navigate('/'); // Navigate to jobs list after deletion
     } catch (err) {
+      console.error('Error deleting job:', err); // Log error for debugging
       setError('Failed to delete job');
     }
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div><Loader /></div>;
   }
 
   if (error) {
@@ -101,7 +106,6 @@ const JobDetails = () => {
               </tr>
             </thead>
             <tbody>
-            
               <tr>
                 <td className="py-2 px-4 border-b">Title</td>
                 <td className="py-2 px-4 border-b">{job.title}</td>
