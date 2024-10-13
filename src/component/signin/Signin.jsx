@@ -54,14 +54,14 @@ const SignIn = () => {
     <div className="flex flex-col justify-center items-center min-h-screen bg-gray-50">
       <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-md mt-4"> {/* Add margin top for spacing */}
         <h2 className="text-2xl font-bold mb-4 text-center">Sign In</h2>
-        <div className='flex justify-center m-auto'>
+        {/* <div className='flex justify-center m-auto'>
         <video
           src={webmVideo} // Use the imported .webm video
           autoPlay
           loop
           muted
         />
-        </div>
+        </div> */}
         {error && <p className="text-red-500 mb-4">{error}</p>}
         {success && <p className="text-green-500 mb-4">{success}</p>}
         <form onSubmit={handleSubmit}>
