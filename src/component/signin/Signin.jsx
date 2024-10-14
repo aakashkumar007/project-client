@@ -6,7 +6,8 @@ import { useDispatch } from "react-redux";
 import { setUser } from "../../redux/authSlice";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai"; // Import new eye icons
 
-import video from '/spy.webm';
+// Import the video
+import video from '../../assets/spy.webm'; // Adjust the path based on your folder structure
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
@@ -52,13 +53,12 @@ const SignIn = () => {
   return (
     <div className="flex flex-col justify-center items-center min-h-screen bg-gray-50">
       <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-md mt-4">
-        {" "}
-        {/* Add margin top for spacing */}
         <h2 className="text-2xl font-bold mb-4 text-center">Sign In</h2>
         <div className="flex justify-center m-auto">
-          <video autoPlay loop muted>
+          {/* Use the imported video here */}
+          <video autoPlay loop muted >
             <source src={video} type="video/webm" />
-            Your browser does not support the video tag. autoPlay loop muted
+            Your browser does not support the video tag.
           </video>
         </div>
         {error && <p className="text-red-500 mb-4">{error}</p>}
