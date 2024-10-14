@@ -1,0 +1,11 @@
+services:
+- type: web
+  name: project-client
+  runtime: static
+  repo: https://github.com/aakashkumar007/project-client
+  envVars:
+  - key: VITE_REACT_API_URL
+    sync: false
+  buildCommand: npm install; npm run build
+  staticPublishPath: dist
+version: "1"
