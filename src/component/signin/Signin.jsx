@@ -7,7 +7,7 @@ import { setUser } from '../../redux/authSlice';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'; // Import new eye icons
 
 // Import the webm video file
-import webmVideo from '../../../public/spy.webm';
+import webmVideo from '/spy.webm';
 
 const SignIn = () => {
   const [email, setEmail] = useState('');
