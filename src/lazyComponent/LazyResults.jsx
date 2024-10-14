@@ -3,15 +3,16 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const LazyResults = ({ results }) => {
+  
   return (
     <section className="bg-white shadow-md rounded-lg p-6">
       <h2 className="text-2xl font-bold text-gray-700 mb-4">Latest Results</h2>
       {results.length > 0 ? (
         results.slice(0, 10).map((result) => (
-          <div key={result.id} className="border-b border-gray-300 py-4">
+          <div key={result._id} className="border-b border-gray-300 py-4">
             <div className="flex justify-between items-start">
               <div className="w-3/4">
-                <Link to={`/result/${result.id}`} className="text-2xl font-serif text-gray-800 hover:underline">
+                <Link to={`/result/${result._id}`} className="text-2xl font-serif text-gray-800 hover:underline">
                   {result.title}
                 </Link>
               </div>

@@ -8,10 +8,10 @@ const LazyAdmitCards = ({ admitCards }) => {
       <h2 className="text-2xl font-bold text-gray-700 mb-4">Latest Admit Cards</h2>
       {admitCards.length > 0 ? (
         admitCards.slice(0, 10).map((admitCard) => (
-          <div key={admitCard.id} className="border-b border-gray-300 py-4">
+          <div key={admitCard._id} className="border-b border-gray-300 py-4">
             <div className="flex justify-between items-start">
               <div className="w-3/4">
-                <Link to={`/admit-card/${admitCard.id}`} className="text-2xl font-serif text-gray-800 hover:underline">
+                <Link to={`/admit-card/${admitCard._id}`} className="text-2xl font-serif text-gray-800 hover:underline">
                   {admitCard.title}
                 </Link>
               </div>

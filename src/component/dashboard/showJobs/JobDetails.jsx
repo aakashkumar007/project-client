@@ -4,7 +4,8 @@ import { toast } from 'sonner';
 import Loader from '../../Loader';
 
 const JobDetails = () => {
-  const { id } = useParams(); // Get the job ID from the URL
+  const {id}  = useParams();
+
   const navigate = useNavigate(); // Initialize navigate
   const [job, setJob] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -34,14 +35,14 @@ const JobDetails = () => {
           },
           credentials: 'include', // Ensure cookies are included if your server requires this
         });
-        console.log(response)
+      
 
         if (!response.ok) {
           throw new Error('Failed to fetch job details');
         }
 
         const data = await response.json();
-        console.log('Job details:', data); // Log the job data
+       
         setJob(data);
       } catch (err) {
         console.error(err); // Log error for debugging
