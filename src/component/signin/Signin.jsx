@@ -6,9 +6,6 @@ import { useDispatch } from 'react-redux';
 import { setUser } from '../../redux/authSlice';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'; // Import new eye icons
 
-// Import the webm video file
-import webmVideo from '/spy.webm';
-
 const SignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -56,7 +53,7 @@ const SignIn = () => {
         <h2 className="text-2xl font-bold mb-4 text-center">Sign In</h2>
         <div className='flex justify-center m-auto'>
         <video
-          src={webmVideo} // Use the imported .webm video
+          src="/spy.webm" // Use the imported .webm video
           autoPlay
           loop
           muted
