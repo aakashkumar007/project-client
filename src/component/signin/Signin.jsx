@@ -6,6 +6,8 @@ import { useDispatch } from "react-redux";
 import { setUser } from "../../redux/authSlice";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai"; // Import new eye icons
 
+import video from '/spy.webm';
+
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -55,8 +57,7 @@ const SignIn = () => {
         <h2 className="text-2xl font-bold mb-4 text-center">Sign In</h2>
         <div className="flex justify-center m-auto">
           <video autoPlay loop muted>
-            <source src="/spy.webm" type="video/webm" />
-            <source src="/spy.mp4" type="video/mp4" />
+            <source src={video} type="video/webm" />
             Your browser does not support the video tag. autoPlay loop muted
           </video>
         </div>
