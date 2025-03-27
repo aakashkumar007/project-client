@@ -79,13 +79,13 @@ const AllAdmitCards = () => {
           {currentAdmitCards.length > 0 ? (
             currentAdmitCards.map((admitCard) => (
               <div
-                key={admitCard.id}
+                key={admitCard._id}
                 className="border-b border-gray-300 py-2"
               >
                 <div className="flex justify-between items-center">
                   <div className="w-full text-center">
                     <Link
-                      to={`/admit-card/${admitCard.id}`}
+                      to={`/admit-card/${admitCard._id}`}
                       className="text-lg font-serif text-gray-800 hover:underline"
                       style={{ lineHeight: '1.1' }}
                     >

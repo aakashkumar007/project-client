@@ -81,14 +81,14 @@ const AllResult = () => {
           {currentResults.length > 0 ? (
             currentResults.map((result) => (
               <div
-                key={result.id}
+                key={result._id}
                 className="border-b border-gray-300 py-1"
                 style={{ marginBottom: '2px', padding: '0 4px' }}
               >
                 <div className="flex justify-center items-center">
                   <div className="w-full text-center">
                     <Link
-                      to={`/result/${result.id}`}
+                      to={`/result/${result._id}`}
                       className="text-lg font-serif text-gray-800 hover:underline"
                       style={{ lineHeight: '1.1' }}
                     >

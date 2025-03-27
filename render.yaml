@@ -1,11 +1,12 @@
+# Exported from Render on 2024-10-14T08:21:13Z
 services:
-- type: web
-  name: project-client
-  runtime: static
-  repo: https://github.com/aakashkumar007/project-client
-  envVars:
-  - key: VITE_REACT_API_URL
-    sync: false
-  buildCommand: npm install; npm run build
-  staticPublishPath: dist
+  - type: web
+    name: project-client
+    runtime: static
+    repo: https://github.com/aakashkumar007/project-client
+    envVars:
+      - key: VITE_REACT_API_URL
+        sync: false
+    buildCommand: npm install; npm run build
+    staticPublishPath: dist
 version: "1"

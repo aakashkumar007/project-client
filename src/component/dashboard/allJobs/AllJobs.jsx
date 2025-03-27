@@ -33,6 +33,7 @@ const AllJobsPage = () => {
         }
 
         const data = await response.json();
+
         const flattenedJobs = data.jobs;
 
         startTransition(() => {
@@ -70,10 +71,10 @@ const AllJobsPage = () => {
         <section className="bg-white shadow-md rounded-lg p-4">
           {validJobs.length > 0 ? (
             validJobs.map((job) => (
-              <div key={job.id} className="border-b border-gray-300 py-1 mb-2">
+              <div key={job._id} className="border-b border-gray-300 py-1 mb-2">
                 <div className="flex justify-between items-center">
                   <Link
-                    to={`/job/${job.id}`}
+                    to={`/job/${job._id}`}
                     className="text-lg font-serif text-gray-800 hover:underline flex-grow text-center"
                     style={{ lineHeight: '1.1' }}
                   >

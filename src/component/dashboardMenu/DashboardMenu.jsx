@@ -6,7 +6,7 @@ const DashboardMenu = () => {
   return (
     <div className="p-4">
       <h1 className="font-bold text-2xl p-2 underline">Menu</h1>
-      <div className="space-y-4 border-2 p-4">
+      <div className="space-y-4  p-4">
         <ul>
           <li>
             <Link

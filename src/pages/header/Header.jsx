@@ -21,7 +21,7 @@ const Header = () => {
       const token = Cookies.get("token"); // Fetch the token from cookies
       if (token) {
         // Simulate fetching user info based on the token, e.g., a stored user object in cookies or a server call
-        const user = { name: "prakash" }; // Replace this with actual user info from the token or server
+        const user = { name: "Aarti" }; // Replace this with actual user info from the token or server
         dispatch(setUser(user)); // Set user info in Redux
       } else {
         dispatch(clearUser()); // Clear user info if not authenticated
@@ -40,7 +40,7 @@ const Header = () => {
       // Simulate logout by clearing cookies and Redux state
       Cookies.remove("token");
       localStorage.removeItem("token");
-      localStorage.removeItem("user")
+      localStorage.removeItem("user");
 
       dispatch(clearUser()); // Clear user info in Redux state
       toast.success("Logout Success");
@@ -60,7 +60,7 @@ const Header = () => {
               alt="logo"
               className="h-13 w-12 hover:bg-slate-600 rounded-full"
             />
-            
+
             <h1 className="text-xl font-bold mt-3">Sarkari Naukari</h1>
           </span>
         </Link>
@@ -78,18 +78,6 @@ const Header = () => {
           <Link to="/get-all-admit-cards" className="hover:text-indigo-300">
             Admit Card
           </Link>
-          <Link to="#answer-key" className="hover:text-indigo-300">
-            Answer Key
-          </Link>
-          <Link to="#syllabus" className="hover:text-indigo-300">
-            Syllabus
-          </Link>
-          <Link to="#search" className="hover:text-indigo-300">
-            Search
-          </Link>
-          <Link to="#contact" className="hover:text-indigo-300">
-            Contact Us
-          </Link>
 
           {/* Conditionally render Dashboard or Sign In based on Redux user state */}
           {userInfo ? (
@@ -98,7 +86,7 @@ const Header = () => {
                 to="/dashboard"
                 className="bg-slate-800 p-2 hover:rounded-full hover:text-yellow-100 text-white"
               >
-                Hello! Prakash
+                Hello! Aarti
               </Link>
               <button
                 onClick={handleSignOut}
@@ -110,7 +98,7 @@ const Header = () => {
           ) : (
             <Link
               to="/signin"
-              className="bg-slate-800 p-2 hover:rounded-full hover:text-yellow-100 text-white"
+              className="bg-slate-800 p-2 rounded-lg border-2 hover:rounded-full hover:text-yellow-100 text-white"
             >
               Sign In
             </Link>
@@ -188,7 +176,7 @@ const Header = () => {
                 <li>
                   <Link
                     to="/signin"
-                    className="block px-4 py-2 hover:bg-indigo-100"
+                    className=" px-4 py-2 rounded-lg hover:bg-indigo-100"
                   >
                     Sign In
                   </Link>
