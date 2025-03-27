@@ -94,13 +94,13 @@ const AllAdmitCards = () => {
                   </div>
                   <div className="text-right w-full mt-1">
                     <p className="text-gray-500 text-xs">
-                      {new Date(admitCard.created_at).toLocaleDateString('en-US', {
+                      {new Date(admitCard.createdAt).toLocaleDateString('en-US', {
                         year: 'numeric',
                         month: 'short',
                         day: 'numeric',
                       })}
                     </p>
-                    <p className="text-gray-500 text-xs">— by Prakash</p>
+                    <p className="text-gray-500 text-xs">— by Aarti</p>
                     <p className="text-gray-500 text-xs">in Latest Admit Cards</p>
                   </div>
                 </div>

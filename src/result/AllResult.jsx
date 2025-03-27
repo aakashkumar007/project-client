@@ -97,13 +97,13 @@ const AllResult = () => {
                   </div>
                   <div className="text-right w-full mt-1">
                     <p className="text-gray-500 text-xs">
-                      {new Date(result.created_at).toLocaleDateString('en-US', {
+                      {new Date(result.createdAt).toLocaleDateString('en-US', {
                         year: 'numeric',
                         month: 'short',
                         day: 'numeric',
                       })}
                     </p>
-                    <p className="text-gray-500 text-xs">— by Prakash</p>
+                    <p className="text-gray-500 text-xs">— by Aarti</p>
                     <p className="text-gray-500 text-xs">in Latest Results</p>
                   </div>
                 </div>

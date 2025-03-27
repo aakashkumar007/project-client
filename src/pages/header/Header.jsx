@@ -51,7 +51,7 @@ const Header = () => {
   };
 
   return (
-    <header className="font-semibold py-4 shadow-md text-slate-800 bg-slate-200 fixed  w-full">
+    <header className="font-semibold py-4 shadow-md text-slate-800 bg-slate-200 fixed z-50  w-full">
       <nav className="container mx-auto flex flex-wrap justify-between items-center">
         <Link to="/">
           <span className="flex gap-4 pl-6">

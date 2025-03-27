@@ -119,7 +119,7 @@ const JobDetails = () => {
               </tr>
               <tr>
                 <td className="py-2 px-4 border-b">Created At</td>
-                <td className="py-2 px-4 border-b">{new Date(job.created_at).toLocaleString()}</td>
+                <td className="py-2 px-4 border-b">{new Date(job.createdAt).toLocaleString()}</td>
               </tr>
             </tbody>
           </table>

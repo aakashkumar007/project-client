@@ -113,7 +113,7 @@ const AdmitCardDetails = () => {
               </tr>
               <tr>
                 <td className="py-2 px-4 border-b">Created At</td>
-                <td className="py-2 px-4 border-b">{new Date(admitCard.created_at).toLocaleDateString()}</td>
+                <td className="py-2 px-4 border-b">{new Date(admitCard.createdAt).toLocaleDateString()}</td>
               </tr>
             </tbody>
           </table>

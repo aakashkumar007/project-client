@@ -36,6 +36,7 @@ const AllJobsPage = () => {
 
         const flattenedJobs = data.jobs;
 
+console.log(flattenedJobs[0].createdAt)
         startTransition(() => {
           setJobs(flattenedJobs);
           setTotalPages(data.totalPages);
@@ -82,13 +83,13 @@ const AllJobsPage = () => {
                   </Link>
                   <div className="text-right">
                     <p className="text-gray-500 text-xs">
-                      {new Date(job.created_at).toLocaleDateString('en-US', {
+                      {new Date(job.createdAt).toLocaleDateString('en-US', {
                         year: 'numeric',
                         month: 'short',
                         day: 'numeric',
                       })}
                     </p>
-                    <p className="text-gray-500 text-xs">— by Prakash</p>
+                    <p className="text-gray-500 text-xs">— by Aarti</p>
                     <p className="text-gray-500 text-xs">in Latest Jobs</p>
                   </div>
                 </div>

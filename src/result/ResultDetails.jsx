@@ -106,7 +106,7 @@ const ResultDetails = () => {
               </tr>
               <tr>
                 <td className="py-2 px-4 border-b">Created At</td>
-                <td className="py-2 px-4 border-b">{new Date(result.created_at).toLocaleString()}</td>
+                <td className="py-2 px-4 border-b">{new Date(result.createdAt).toLocaleString()}</td>
               </tr>
             </tbody>
           </table>
